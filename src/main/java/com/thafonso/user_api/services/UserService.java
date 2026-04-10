@@ -48,17 +48,18 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public User updateUser(User user) {
-        User updatedUser = userRepository.getReferenceById(user.getId());
-        updateData(updatedUser, user);
-        return userRepository.save(updatedUser);
+    public UserDTO updateUser(Long id, UserDTO userdto) {
+        User updatedUser = userRepository.getReferenceById(id);
+        updateData(updatedUser, userdto);
+        updatedUser = userRepository.save(updatedUser);
+        return new UserDTO(updatedUser);
     }
 
-    private void updateData(User updatedUser, User user) {
-        updatedUser.setUsername(user.getUsername());
-        updatedUser.setEmail(user.getEmail());
-        updatedUser.setCpf(user.getCpf());
-        updatedUser.setBirthdate(user.getBirthdate());
+    private void updateData(User updatedUser, UserDTO userdto) {
+        updatedUser.setUsername(userdto.getUsername());
+        updatedUser.setEmail(userdto.getEmail());
+        updatedUser.setCpf(userdto.getCpf());
+        updatedUser.setBirthdate(userdto.getBirthdate());
     }
 
 
