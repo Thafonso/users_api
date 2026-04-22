@@ -5,6 +5,7 @@ import com.thafonso.user_api.validations.CpfValid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.Instant;
 
