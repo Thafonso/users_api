@@ -3,6 +3,7 @@ package com.thafonso.user_api.controller;
 import com.thafonso.user_api.dto.UserDTO;
 import com.thafonso.user_api.entities.User;
 import com.thafonso.user_api.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +32,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> save(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<Void> save(@Valid @RequestBody UserDTO userDTO) {
         UserDTO newUser = userService.insertUser(userDTO);
 
         URI uri = ServletUriComponentsBuilder.
@@ -50,7 +51,7 @@ public class UserController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Void> updateUser(@PathVariable Long id, @RequestBody UserDTO userDTO) {
-        UserDTO updetedUser = userService.updateUser(id, userDTO);
+        userService.updateUser(id, userDTO);
         return ResponseEntity.noContent().build();
     }
 

@@ -35,7 +35,7 @@ public class UserService {
     // convertion method
     public User fromDTO(UserDTO userdto) {
         User user = new User();
-        userdto.setId(userdto.getId());
+        user.setId(userdto.getId());
         user.setUsername(userdto.getUsername());
         user.setEmail(userdto.getEmail());
         user.setCpf(userdto.getCpf());
@@ -44,15 +44,23 @@ public class UserService {
     }
 
     public void deleteUser(Long id) {
-        findById(id);
-        userRepository.deleteById(id);
+        try {
+            userRepository.deleteById(id);
+        } catch (NotFoundException e){
+            throw new NotFoundException(id);
+        }
     }
 
     public UserDTO updateUser(Long id, UserDTO userdto) {
-        User updatedUser = userRepository.getReferenceById(id);
-        updateData(updatedUser, userdto);
-        updatedUser = userRepository.save(updatedUser);
-        return new UserDTO(updatedUser);
+        try {
+            User updatedUser = userRepository.getReferenceById(id);
+            updateData(updatedUser, userdto);
+            updatedUser = userRepository.save(updatedUser);
+            return new UserDTO(updatedUser);
+        } catch (NotFoundException e){
+            throw new NotFoundException(id);
+        }
+
     }
 
     private void updateData(User updatedUser, UserDTO userdto) {

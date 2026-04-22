@@ -1,15 +1,28 @@
 package com.thafonso.user_api.dto;
 
 import com.thafonso.user_api.entities.User;
+import com.thafonso.user_api.validations.CpfValid;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
 
 import java.time.Instant;
 
 public class UserDTO {
 
     private Long id;
+
+    @NotBlank(message = "You need to put an username")
     private String username;
+
+    @NotBlank(message = "You need to put an email")
+    @Email(message = "invalid format")
     private String email;
+
+    @CpfValid
     private String cpf;
+
+    @Past(message = "the birthdate cant be in the future")
     private Instant birthdate;
 
     public UserDTO(User user) {
