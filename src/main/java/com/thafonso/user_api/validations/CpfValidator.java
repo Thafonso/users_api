@@ -1,6 +1,6 @@
 package com.thafonso.user_api.validations;
 
-public class CpfValidator {
+public class CpfValidator{
 
     public static boolean isValid(String cpf){
         cpf = cpf.replaceAll("[^0-9]", "");

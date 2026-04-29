@@ -13,17 +13,17 @@ public class UserDTO {
 
     private Long id;
 
-    @NotBlank(message = "You need to put an username")
+    @NotBlank(message = "Username is required.")
     private String username;
 
-    @NotBlank(message = "You need to put an email")
+    @NotBlank(message = "Email address is required.")
     @Email(message = "invalid format")
     private String email;
 
     @CpfValid
     private String cpf;
 
-    @Past(message = "the birthdate cant be in the future")
+    @Past(message = "Birthdate cannot be in the future")
     private Instant birthdate;
 
     public UserDTO(User user) {
